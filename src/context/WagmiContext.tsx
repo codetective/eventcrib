@@ -1,3 +1,5 @@
+'use client';
+
 import { WagmiConfig, createConfig, configureChains } from 'wagmi';
 import { polygonMumbai } from 'wagmi/chains';
 import { ReactNode } from 'react';
@@ -12,7 +14,7 @@ let projectId = walletID!.toString()!;
 
 const chains = [polygonMumbai];
 
-const { publicClient } = configureChains(chains, w3mProvider({ projectId }));
+const { publicClient } = configureChains(chains, [w3mProvider({ projectId })]);
 const config = createConfig({
   autoConnect: true,
   connectors: w3mConnectors({ projectId, chains }),
