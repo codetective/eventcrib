@@ -18,16 +18,16 @@ const MobileNavbar = ({
     <div
       className={
         openMenu
-          ? 'z-80 fixed left-0 top-0 h-screen w-full bg-orange-500/20 duration-700 ease-in-out lg:hidden'
-          : 'bg-sm8/60 z-80 duration-900 fixed -left-[100%] top-0 h-screen w-full ease-in-out lg:hidden'
+          ? 'z-80 fixed left-0 top-0 h-screen w-full bg-black/10 duration-50 ease-in-out lg:hidden'
+          : 'bg-sm8/60 z-80 duration-50 fixed -left-[100%] top-0 h-screen w-full ease-in-out lg:hidden'
       }
       onClick={handleClose}
     >
       <div
         className={
           openMenu
-            ? ' z-80 fixed left-0 top-0 h-screen w-[70%] bg-gradient-to-r from-blue-900 to-blue-800/90 px-3 pt-3  shadow-xl shadow-orange-500 duration-700 ease-in md:w-[50%]'
-            : 'z-80 fixed -left-[100%] top-0 h-screen w-[75%] bg-gradient-to-r from-blue-900 to-blue-800/90 px-3 pt-3 shadow-xl shadow-orange-500 duration-700 ease-in md:w-[55%]'
+            ? ' z-80 fixed left-0 top-0 h-screen w-[70%] bg-slate-200 px-3 pt-3  shadow-xl duration-500 ease-in md:w-[50%]'
+            : 'z-80 fixed -left-[100%] top-0 h-screen w-[75%] bg-slate-200 px-3 pt-3 shadow-xl  duration-500 ease-in md:w-[55%]'
         }
         onClick={(e) => e.stopPropagation()}
       >
@@ -40,7 +40,7 @@ const MobileNavbar = ({
           </div>
         </div>
         {/* the side bar tools */}
-        <div className='flex flex-col space-y-8 text-lg font-semibold text-white'>
+        <div className='flex flex-col space-y-8 text-xl font-semibold'>
           <Link href='/'>Home</Link>
           <Link href='/events'>All Events</Link>
           <Link href='/create'>Create Event</Link>

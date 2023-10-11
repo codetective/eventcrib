@@ -24,9 +24,10 @@ function Navbar() {
             <Link href='/my_tickets'>My tickets</Link>
           </div>
           <ConnectButton />
-          <div className='text-orange-500 duration-300 ease-in sm:block md:hidden'>
+
+          <div className='text-orange-500 duration-300 ease-in  flex items-center justify-center md:hidden'>
             <button
-              className='p-0 text-orange-500 '
+              className='p-0 text-orange-500'
               aria-label='mobile-nav'
               onClick={() => setOpenMenu((current) => !current)}
             >

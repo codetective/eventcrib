@@ -3,6 +3,8 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { Toaster } from 'react-hot-toast';
+import AppProvider from '@/context/AppProvider';
+import SetupWeb3Modal from './SetupWeb3Modal';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -21,8 +23,9 @@ export default function RootLayout({
       <body className={inter.className}>
         <WagmiProvider>
           <Toaster />
-          {children}
+          <AppProvider>{children}</AppProvider>
         </WagmiProvider>
+        <SetupWeb3Modal />
       </body>
     </html>
   );

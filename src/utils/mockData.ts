@@ -1,45 +1,45 @@
 export const events = [
   {
-    id: '11',
+    eventId: '11',
     category: 'Conferences',
     title: 'Tech Fest Canada 2022',
     desc: 'The gathering of the tech gurus and enthusiast, the place to meet seasoned developers',
-    image: 'tech.png',
+    image: '/images/events/tech.png',
   },
   {
-    id: '12',
+    eventId: '12',
     category: 'Music',
     title: 'Music Carnival 2022',
     desc: 'The gathering of the tech gurus and enthusiast, the place to meet seasoned developers',
-    image: 'carnival.png',
+    image: '/images/events/carnival.png',
   },
   {
-    id: '13',
+    eventId: '13',
     category: 'Music',
     title: 'The Music Concert 2022',
     desc: 'The gathering of the tech gurus and enthusiast, the place to meet seasoned developers',
-    image: 'concert.png',
+    image: '/images/events/concert.png',
   },
   {
-    id: '14',
+    eventId: '14',
     category: 'Music',
     title: 'The Great Orchestra Concert',
     desc: 'The gathering of the tech gurus and enthusiast, the place to meet seasoned developers',
-    image: 'music.png',
+    image: '/images/events/music.png',
   },
   {
-    id: '15',
+    eventId: '15',
     category: 'Blockchain',
     title: 'Blockchain Summit',
     desc: 'The gathering of the tech gurus and enthusiast, the place to meet seasoned developers',
-    image: 'blockchain.png',
+    image: '/images/events/blockchain.png',
   },
   {
-    id: '16',
+    eventId: '16',
     category: 'Tech',
     title: 'Tech Fest Canada 2023',
     desc: 'The gathering of the tech gurus and enthusiast, the place to meet seasoned developers',
-    image: 'musicfest.png',
+    image: '/images/events/musicfest.png',
   },
 ];
 
@@ -48,56 +48,49 @@ export const categories = [
     id: 1,
     catImage: 'blockchain.png',
     catTitle: 'BlockChain Events',
-    name: 'blockchain'
+    name: 'blockchain',
   },
   {
     id: 2,
     catImage: 'summits.png',
     catTitle: 'Summits',
-    name: 'summit'
-
+    name: 'summit',
   },
   {
     id: 3,
     catImage: 'music.png',
     catTitle: 'Music Events',
-    name: 'music'
-
+    name: 'music',
   },
   {
     id: 4,
     catImage: 'concerts.png',
     catTitle: 'Concerts',
-    name: 'concerts'
-
+    name: 'concerts',
   },
   {
     id: 5,
     catImage: 'social.png',
     catTitle: 'Social Events',
-    name: 'social'
-
+    name: 'social',
   },
   {
     id: 6,
     catImage: 'audition.png',
     catTitle: 'Open Mic Auditons',
-    name: 'audition'
-
+    name: 'audition',
   },
   {
     id: 7,
     catImage: 'conference.png',
     catTitle: 'Conferences',
-    name: 'conference'
-
+    name: 'conference',
   },
   {
     id: 8,
     catImage: 'hackathons.png',
     catTitle: 'Hackathons',
-    name: 'hackathon'
-
+    name: 'hackathon',
   },
 ];
 
@@ -177,81 +170,88 @@ export const searchEvents = [
   },
 ];
 
-
 export const mockTickets = [
   {
-    "id": "11",
-    "category": "Conferences",
-    "title": "Tech Fest Canada 2022",
-    "desc": "The gathering of the tech gurus and enthusiast, the place to meet seasoned developers",
-    "location": "Port Harcourt",
-    "startDate": "12 April 2022",
-    "time": "12:34 PM",
-    "price": "50",
-    "image": "https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+    id: '11',
+    category: 'Conferences',
+    title: 'Tech Fest Canada 2022',
+    desc: 'The gathering of the tech gurus and enthusiast, the place to meet seasoned developers',
+    location: 'Port Harcourt',
+    startDate: '12 April 2022',
+    time: '12:34 PM',
+    price: '50',
+    image:
+      'https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80',
   },
   {
-    "id": "12",
-    "category": "Conferences",
-    "title": "Tech Fest Canada 2022",
-    "desc": "The gathering of the tech gurus and enthusiast, the place to meet seasoned developers",
-    "location": "Port Harcourt",
-    "startDate": "12 April 2022",
-    "time": "12:34 PM",
-    "price": "50",
-    "image": "https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+    id: '12',
+    category: 'Conferences',
+    title: 'Tech Fest Canada 2022',
+    desc: 'The gathering of the tech gurus and enthusiast, the place to meet seasoned developers',
+    location: 'Port Harcourt',
+    startDate: '12 April 2022',
+    time: '12:34 PM',
+    price: '50',
+    image:
+      'https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80',
   },
   {
-    "id": "13",
-    "category": "Conferences",
-    "title": "Tech Fest Canada 2022",
-    "desc": "The gathering of the tech gurus and enthusiast, the place to meet seasoned developers",
-    "location": "Port Harcourt",
-    "startDate": "12 April 2022",
-    "time": "12:34 PM",
-    "price": "50",
-    "image": "https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+    id: '13',
+    category: 'Conferences',
+    title: 'Tech Fest Canada 2022',
+    desc: 'The gathering of the tech gurus and enthusiast, the place to meet seasoned developers',
+    location: 'Port Harcourt',
+    startDate: '12 April 2022',
+    time: '12:34 PM',
+    price: '50',
+    image:
+      'https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80',
   },
   {
-    "id": "14",
-    "category": "Conferences",
-    "title": "Tech Fest Canada 2022",
-    "desc": "The gathering of the tech gurus and enthusiast, the place to meet seasoned developers",
-    "location": "Port Harcourt",
-    "startDate": "12 April 2022",
-    "time": "12:34 PM",
-    "price": "50",
-    "image": "https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+    id: '14',
+    category: 'Conferences',
+    title: 'Tech Fest Canada 2022',
+    desc: 'The gathering of the tech gurus and enthusiast, the place to meet seasoned developers',
+    location: 'Port Harcourt',
+    startDate: '12 April 2022',
+    time: '12:34 PM',
+    price: '50',
+    image:
+      'https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80',
   },
-]
+];
 
 export const mockGallery = [
   {
-    "id": "11",
-    "title": "Tech Fest Canada 2022",
+    id: '11',
+    title: 'Tech Fest Canada 2022',
 
-    "location": "Port Harcourt",
-    "image": "https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+    location: 'Port Harcourt',
+    image:
+      'https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80',
   },
   {
-    "id": "12",
-    "title": "Tech Fest Canada 2022",
+    id: '12',
+    title: 'Tech Fest Canada 2022',
 
-    "location": "Port Harcourt",
-    "image": "https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+    location: 'Port Harcourt',
+    image:
+      'https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80',
   },
   {
-    "id": "13",
-    "title": "Tech Fest Canada 2022",
+    id: '13',
+    title: 'Tech Fest Canada 2022',
 
-    "location": "Port Harcourt",
-    "image": "https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+    location: 'Port Harcourt',
+    image:
+      'https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80',
   },
   {
-    "id": "14",
-    "title": "Tech Fest Canada 2022",
+    id: '14',
+    title: 'Tech Fest Canada 2022',
 
-    "location": "Port Harcourt",
-    "image": "https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+    location: 'Port Harcourt',
+    image:
+      'https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80',
   },
-]
+];

@@ -21,7 +21,7 @@ const config = createConfig({
   publicClient,
 });
 
-const ethereumClient = new EthereumClient(config, chains);
+export const ethereumClient = new EthereumClient(config, chains);
 
 function WagmiProvider({ children }: { children: ReactNode }) {
   return <WagmiConfig config={config}>{children}</WagmiConfig>;

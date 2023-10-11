@@ -6,7 +6,7 @@ import MainLayout from '@/components/layout/MainLayout';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'EventCrib Homepage | Web3 event management system',
+  title: 'Welcome to EvhentCrib - Web3 event management system',
 };
 
 export default function Home() {

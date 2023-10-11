@@ -3,9 +3,7 @@ import React from 'react';
 import WrapContent from '../common/WrapContent';
 import { categories } from '@/utils/mockData';
 
-type Props = {};
-
-const CategoryGrid = (props: Props) => {
+const CategoryGrid = () => {
   return (
     <WrapContent>
       <div className='mx-auto space-y-4 px-4 py-10 '>
