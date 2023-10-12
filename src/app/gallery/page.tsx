@@ -9,8 +9,8 @@ function Gallery() {
       <WrapContent>
         <div className='py-5'>
           <h1 className='px-2 py-5 text-xl capitalize'>EVENTS GALLERY</h1>
-          <GalleryGrid />
         </div>
+        <GalleryGrid />
       </WrapContent>
     </MainLayout>
   );

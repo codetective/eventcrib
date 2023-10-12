@@ -14,8 +14,8 @@ function Events() {
       <WrapContent>
         <div className='py-5'>
           <h1 className='px-2 py-5 text-xl capitalize'>ALL EVENTS</h1>
-          <EventsGrid />
         </div>
+        <EventsGrid />
       </WrapContent>
     </MainLayout>
   );
