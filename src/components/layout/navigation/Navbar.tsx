@@ -19,7 +19,7 @@ function Navbar() {
           <div className='hidden items-center space-x-5 sm:space-x-4 md:flex'>
             <Link href='/'>Home</Link>
             <Link href='/events'>All Events</Link>
-            <Link href='/create'>Create Event</Link>
+            <Link href='/dashboard'>Create Event</Link>
             <Link href='/gallery'>Gallery</Link>
             <Link href='/my_tickets'>My tickets</Link>
           </div>

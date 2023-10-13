@@ -10,7 +10,7 @@ import React from 'react';
 function SetupWeb3Modal() {
   return (
     <>
-      <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />;
+      <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />
     </>
   );
 }

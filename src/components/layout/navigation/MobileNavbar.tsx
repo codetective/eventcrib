@@ -43,7 +43,7 @@ const MobileNavbar = ({
         <div className='flex flex-col space-y-8 text-xl font-semibold'>
           <Link href='/'>Home</Link>
           <Link href='/events'>All Events</Link>
-          <Link href='/create'>Create Event</Link>
+          <Link href='/dashboard'>Create Event</Link>
           <Link href='/gallery'>Gallery</Link>
           <Link href='/my_tickets'>My Tickets</Link>
         </div>
