@@ -21,7 +21,8 @@
     "react-icons": "^4.11.0",
     "rodal": "^2.1.0",
     "viem": "^1.16.2",
-    "wagmi": "^1.4.3"
+    "wagmi": "^1.4.3",
+    "web3.storage": "^4.5.5"
   },
   "devDependencies": {
     "@types/node": "^20",

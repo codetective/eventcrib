@@ -22,7 +22,7 @@ export default function RootLayout({
     <html lang='en'>
       <body className={inter.className}>
         <WagmiProvider>
-          <Toaster />
+          <Toaster position='bottom-right' />
           <AppProvider>{children}</AppProvider>
         </WagmiProvider>
         <SetupWeb3Modal />

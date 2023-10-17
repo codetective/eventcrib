@@ -4,9 +4,11 @@ import FormLabel from '@/components/forms/FormLabel';
 import Input from '@/components/forms/Input';
 import Image from 'next/image';
 import React, { ChangeEvent, useState } from 'react';
+import SubmitImage from './SubmitImage';
 
 function GeneralCreateForm({ category }: { category: string }) {
   const [imageFile, setImage] = useState<File | null>(null);
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     let file = e.target.files![0];
@@ -192,8 +194,8 @@ function GeneralCreateForm({ category }: { category: string }) {
 
       {/* image */}
 
-      <div className='flex flex-wrap -mx-3 mb-2'>
-        <div className='w-full md:w-1/3 px-3 mb-6 md:mb-0'>
+      <div className='flex  -mx-3 mb-2'>
+        <div className='w-full md:w-[40%] px-3 mb-6 md:mb-0'>
           <div className='w-full'>
             <FormLabel name={'image'}>Event Banner/Image</FormLabel>
             <Input
@@ -205,7 +207,7 @@ function GeneralCreateForm({ category }: { category: string }) {
             />
           </div>
         </div>
-        <div className='w-full md:w-1/2 h-60 relative border border-gray-400 bg-gray-100 px-3 mb-6 md:mb-0'>
+        <div className='w-full md:w-[60%] h-60 relative border border-gray-400 bg-gray-100 px-3 mb-6 md:mb-0'>
           {imageFile ? (
             <Image
               src={URL.createObjectURL(imageFile!)}
@@ -217,14 +219,18 @@ function GeneralCreateForm({ category }: { category: string }) {
             ''
           )}
           <p className='absolute bottom-1 text-red-500 right-1 text-sm italic'>
-            {imageFile ? 'preview' : 'no image selected'}
+            image preview box
           </p>
         </div>
       </div>
       <div className='flex justify-end'>
-        <button className='py-2 px-5 rounded-full text-white bg-green-500'>
-          Upload
-        </button>
+        {!imageUrl ? (
+          <SubmitImage image={imageFile} setImageUrl={setImageUrl} />
+        ) : (
+          <button className='py-2 px-5 rounded-full text-white bg-green-500'>
+            Create event
+          </button>
+        )}
       </div>
     </form>
   );
