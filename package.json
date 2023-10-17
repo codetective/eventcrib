@@ -19,6 +19,7 @@
     "react-dom": "^18",
     "react-hot-toast": "^2.4.1",
     "react-icons": "^4.11.0",
+    "rodal": "^2.1.0",
     "viem": "^1.16.2",
     "wagmi": "^1.4.3"
   },

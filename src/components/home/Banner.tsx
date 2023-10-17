@@ -15,7 +15,7 @@ const Banner = (props: Props) => {
         powered by IPFS!
       </p>
       <div className='my-10 flex items-center gap-5 font-bold'>
-        <Link href='/create'>
+        <Link href='/dashboard'>
           <button className=' rounded-lg bg-[#f24726] p-4 text-white hover:bg-[#f24726]/80'>
             Create an event
           </button>

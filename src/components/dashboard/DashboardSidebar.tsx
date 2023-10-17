@@ -1,6 +1,8 @@
 import React from 'react';
 import { AiFillHome, AiOutlineOrderedList } from 'react-icons/ai';
 import ActiveLink from '../layout/navigation/ActiveLink';
+import { MdNewLabel } from 'react-icons/md';
+import { FiImage } from 'react-icons/fi';
 
 const Linkclasses =
   'flex items-center hover:bg-yellow-50 rounded-xl font-bold text-sm text-gray-900 py-3 px-4';
@@ -30,6 +32,14 @@ function DashboardSidebar({ toggle = false }) {
                 </ActiveLink>
               </li>
               <li>
+                <ActiveLink href='/dashboard/create' className={Linkclasses}>
+                  <div className='text-xl px-4'>
+                    <MdNewLabel />
+                  </div>
+                  Create event
+                </ActiveLink>
+              </li>
+              <li>
                 <ActiveLink href='/dashboard/events' className={Linkclasses}>
                   <div className='text-xl px-4'>
                     <AiOutlineOrderedList />
@@ -40,7 +50,7 @@ function DashboardSidebar({ toggle = false }) {
               <li>
                 <ActiveLink href='/dashboard/Gallery' className={Linkclasses}>
                   <div className='text-xl px-4'>
-                    <AiOutlineOrderedList />
+                    <FiImage />
                   </div>
                   Gallery
                 </ActiveLink>

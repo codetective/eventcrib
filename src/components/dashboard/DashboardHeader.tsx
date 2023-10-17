@@ -18,7 +18,7 @@ function DashboardHeader({
           <div>
             <Logo />
           </div>
-          <>
+          <div className='flex items-center gap-3'>
             <ConnectButton />
             <button
               className='md:hidden text-4xl text-orange-500  rounded-lg hover:text-white transition-colors ease-in-out hover:bg-orange-500'
@@ -26,7 +26,7 @@ function DashboardHeader({
             >
               {open ? <AiOutlineClose /> : <BiMenuAltRight />}
             </button>
-          </>
+          </div>
         </div>
       </div>
     </header>

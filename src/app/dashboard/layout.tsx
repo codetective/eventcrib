@@ -1,7 +1,6 @@
 'use client';
 
 import WrapContent from '@/components/common/WrapContent';
-import CustomBox from '@/components/dashboard/CustomBox';
 import DashboardHeader from '@/components/dashboard/DashboardHeader';
 import DashboardSidebar from '@/components/dashboard/DashboardSidebar';
 import React, { ReactNode, useState } from 'react';
@@ -18,9 +17,7 @@ function DashboardLayout({ children }: { children: ReactNode }) {
 
         <main className='md:ml-60 pt-16 h-screen overflow-auto'>
           <WrapContent className='py-1'>
-            <div className='max-w-4xl mx-auto'>
-              <CustomBox>{children}</CustomBox>
-            </div>
+            <div className='mx-auto'>{children}</div>
           </WrapContent>
         </main>
       </div>

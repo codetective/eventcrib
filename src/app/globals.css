@@ -69,3 +69,10 @@ button:disabled {
   background: #5c5b5b0f;
   color: #f97316;
 }
+
+.rodal-dialog {
+  width: 80% !important;
+  max-width: 700px;
+  height: 60% !important;
+  max-height: 500px;
+}
