@@ -9,7 +9,7 @@ function SubmitImage({
   setImageUrl,
 }: {
   image: File | null;
-  setImageUrl: Dispatch<SetStateAction<string | null>>;
+  setImageUrl: Dispatch<SetStateAction<string>>;
 }) {
   const [loading, setLoading] = useState(false);
 
@@ -36,14 +36,12 @@ function SubmitImage({
   return (
     <div>
       <button
+        disabled={loading}
         type='button'
         onClick={UploadImage}
-        className='flex items-center gap-1 py-2 px-5 rounded-full text-white bg-green-500'
+        className='flex items-center gap-1 py-1 px-2 rounded-full text-white bg-blue-500'
       >
-        <div role='status'>
-          {loading ? <Spinner /> : ''}
-          <span className='sr-only'>Loading...</span>
-        </div>
+        {loading ? <Spinner /> : ''}
         Upload image
       </button>
     </div>

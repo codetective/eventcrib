@@ -3,12 +3,46 @@
 import FormLabel from '@/components/forms/FormLabel';
 import Input from '@/components/forms/Input';
 import Image from 'next/image';
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, FormEventHandler, useState } from 'react';
 import SubmitImage from './SubmitImage';
+import toast from 'react-hot-toast';
+import Spinner from '@/components/common/Spinner';
+import { createEventInDB } from '@/actions/actions';
+import { useRouter } from 'next/navigation';
+
+type FormStateType = {
+  attendees: number | string;
+  end_date: string;
+  event_desc: string;
+  event_info: string;
+  event_name: string;
+  event_type: string;
+  location: string;
+  price: number | string;
+  start_date: string;
+  time: string;
+  website: string;
+};
 
 function GeneralCreateForm({ category }: { category: string }) {
+  const { push } = useRouter();
+
   const [imageFile, setImage] = useState<File | null>(null);
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [imageUrl, setImageUrl] = useState<string>('');
+  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState<FormStateType>({
+    event_name: '',
+    event_desc: '',
+    event_info: '',
+    event_type: 'physical',
+    website: '',
+    location: '',
+    price: 0,
+    attendees: 0,
+    start_date: '',
+    end_date: '',
+    time: '',
+  });
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     let file = e.target.files![0];
@@ -18,8 +52,43 @@ function GeneralCreateForm({ category }: { category: string }) {
     setImage(file);
   };
 
+  const handleFieldChange = (
+    e: ChangeEvent<HTMLInputElement & HTMLSelectElement & HTMLTextAreaElement>
+  ) => {
+    let name = e.target.name;
+    let value =
+      name === 'price' || name === 'attendees'
+        ? Number(e.target.value).toString()
+        : e.target.value;
+
+    setFormData((prev) => {
+      return { ...prev, [name]: value };
+    });
+  };
+
+  const storeEvent: FormEventHandler<HTMLFormElement> = async (e) => {
+    e.preventDefault();
+    let data = {
+      ...formData,
+      banner: imageUrl,
+      user_address: 'wallet',
+      attendees: parseInt(formData.attendees as string),
+      price: parseInt(formData.price as string),
+    };
+    setLoading(true);
+    const res = await createEventInDB(data);
+    if (!res) {
+      toast.error('Something went wrong while saving to database');
+      setLoading(false);
+      return;
+    }
+
+    toast.success('Event created successfully!');
+    return push('/dashboard/events');
+  };
+
   return (
-    <form className='w-full flex flex-col gap-5 pb-10'>
+    <form className='w-full flex flex-col gap-5 pb-10' onSubmit={storeEvent}>
       {/* event name */}
 
       <div className='w-full'>
@@ -28,7 +97,9 @@ function GeneralCreateForm({ category }: { category: string }) {
           id='name'
           type='text'
           placeholder='eg. Jays Haloween Party'
-          name='name'
+          name='event_name'
+          value={formData.event_name}
+          onChange={handleFieldChange}
           required={true}
         />
       </div>
@@ -41,7 +112,9 @@ function GeneralCreateForm({ category }: { category: string }) {
           id='desc'
           type='text'
           placeholder='eg. haloween party for everyone to attend'
-          name='desc'
+          name='event_desc'
+          value={formData.event_desc}
+          onChange={handleFieldChange}
           required={true}
         />
       </div>
@@ -53,7 +126,9 @@ function GeneralCreateForm({ category }: { category: string }) {
           className='
             block appearance-none  bg-gray-200  border-gray-200 text-gray-700
             resize-none w-full h-32 p-2 border rounded-md focus:bg-white focus:outline-none focus:border-orange-500'
-          name='info'
+          name='event_info'
+          value={formData.event_info}
+          onChange={handleFieldChange}
           id='info'
           placeholder='eg. haloween party for everyone to attend'
           required={true}
@@ -70,10 +145,12 @@ function GeneralCreateForm({ category }: { category: string }) {
               className='block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-orange-500'
               id='event_type'
               name='event_type'
+              value={formData.event_type}
+              onChange={handleFieldChange}
             >
-              <option>Physical</option>
-              <option>Virtual</option>
-              <option>Hybrid</option>
+              <option value='physical'>Physical</option>
+              <option value='virtual'>Virtual</option>
+              <option value='hybrid'>Hybrid</option>
             </select>
             <div className='pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700'>
               <svg
@@ -96,6 +173,8 @@ function GeneralCreateForm({ category }: { category: string }) {
               type='url'
               placeholder='www.....'
               name='website'
+              value={formData.website}
+              onChange={handleFieldChange}
             />
           </div>
         </div>
@@ -110,6 +189,8 @@ function GeneralCreateForm({ category }: { category: string }) {
           type='text'
           placeholder='Town Hall 6, Vegas'
           name='location'
+          value={formData.location}
+          onChange={handleFieldChange}
           required={true}
         />
         <p className='text-xs italic text-gray-500'>
@@ -129,7 +210,9 @@ function GeneralCreateForm({ category }: { category: string }) {
               type='number'
               placeholder='3'
               name='price'
-              min={0.1}
+              value={formData.price}
+              onChange={handleFieldChange}
+              min={0}
             />
           </div>
         </div>
@@ -143,6 +226,8 @@ function GeneralCreateForm({ category }: { category: string }) {
               type='number'
               placeholder='100'
               name='attendees'
+              value={formData.attendees}
+              onChange={handleFieldChange}
               min={1}
             />
           </div>
@@ -160,6 +245,10 @@ function GeneralCreateForm({ category }: { category: string }) {
               type='date'
               placeholder='05/05/2023'
               name='start_date'
+              value={formData.start_date}
+              onChange={handleFieldChange}
+              min={new Date().toISOString().split('T')[0]}
+              required
             />
           </div>
         </div>
@@ -173,6 +262,9 @@ function GeneralCreateForm({ category }: { category: string }) {
               type='date'
               placeholder='05/05/2023'
               name='end_date'
+              value={formData.end_date}
+              onChange={handleFieldChange}
+              min={new Date().toISOString().split('T')[0]}
             />
             <p className='text-xs italic text-gray-500'>leave blank if none</p>
           </div>
@@ -183,10 +275,13 @@ function GeneralCreateForm({ category }: { category: string }) {
           <div className='w-full'>
             <FormLabel name={'event_time'}>Time of Event</FormLabel>
             <Input
-              id='event_time'
+              id='time'
               type='time'
               placeholder='0800'
-              name='event_time'
+              name='time'
+              value={formData.time}
+              onChange={handleFieldChange}
+              required
             />
           </div>
         </div>
@@ -205,6 +300,11 @@ function GeneralCreateForm({ category }: { category: string }) {
               accept='image/*'
               onChange={handleImageChange}
             />
+            {imageUrl === '' ? (
+              <SubmitImage image={imageFile} setImageUrl={setImageUrl} />
+            ) : (
+              ''
+            )}
           </div>
         </div>
         <div className='w-full md:w-[60%] h-60 relative border border-gray-400 bg-gray-100 px-3 mb-6 md:mb-0'>
@@ -212,7 +312,7 @@ function GeneralCreateForm({ category }: { category: string }) {
             <Image
               src={URL.createObjectURL(imageFile!)}
               fill
-              objectFit='contain'
+              className='object-contain'
               alt='viewing image before upload'
             />
           ) : (
@@ -223,14 +323,24 @@ function GeneralCreateForm({ category }: { category: string }) {
           </p>
         </div>
       </div>
-      <div className='flex justify-end'>
-        {!imageUrl ? (
-          <SubmitImage image={imageFile} setImageUrl={setImageUrl} />
-        ) : (
-          <button className='py-2 px-5 rounded-full text-white bg-green-500'>
-            Create event
+      <div className='flex justify-end items-end'>
+        <div className='flex flex-col items-end'>
+          <button
+            disabled={loading || imageUrl === ''}
+            type='submit'
+            className='py-2 px-5 flex items-center gap-1 rounded-full text-white bg-green-500'
+          >
+            {loading ? <Spinner /> : ''}
+            {loading ? 'creating event ...' : 'Create event'}
           </button>
-        )}
+          {imageUrl !== '' ? (
+            ''
+          ) : (
+            <small className='italic pt-3 font-bold text-red-500'>
+              * please upload image first
+            </small>
+          )}
+        </div>
       </div>
     </form>
   );
