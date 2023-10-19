@@ -20,7 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body className={inter.className}>
+      <body className={inter.className} id='main_layout'>
         <WagmiProvider>
           <Toaster position='bottom-right' />
           <AppProvider>{children}</AppProvider>

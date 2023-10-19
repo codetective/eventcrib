@@ -15,7 +15,7 @@ function SubmitImage({
 
   const UploadImage = async () => {
     if (!image) {
-      toast.error('Please select an image');
+      toast.error('Please select a validimage');
       return;
     }
     setLoading(true);

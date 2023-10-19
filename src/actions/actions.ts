@@ -14,6 +14,8 @@ export type EventData = {
   user_address: string;
   website: string;
   banner: string;
+  category: string;
+  id?: string;
 };
 
 import db from '@/utils/db';
@@ -33,6 +35,7 @@ export async function createEventInDB(data: EventData) {
     user_address,
     website,
     banner,
+    category,
   } = data;
   try {
     const res = await db.event.create({
@@ -50,6 +53,7 @@ export async function createEventInDB(data: EventData) {
         user_address,
         website,
         banner,
+        category,
       },
     });
 

@@ -49,6 +49,10 @@ function GeneralCreateForm({ category }: { category: string }) {
     if (!file) {
       return;
     }
+    if (file.size > 1 * 1000 * 1024) {
+      toast.error('File with maximum size of 1MB is allowed');
+      return;
+    }
     setImage(file);
   };
 
@@ -74,8 +78,10 @@ function GeneralCreateForm({ category }: { category: string }) {
       user_address: 'wallet',
       attendees: parseInt(formData.attendees as string),
       price: parseInt(formData.price as string),
+      category: category,
     };
     setLoading(true);
+
     const res = await createEventInDB(data);
     if (!res) {
       toast.error('Something went wrong while saving to database');

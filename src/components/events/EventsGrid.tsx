@@ -1,26 +1,22 @@
-'use client';
-
 import React from 'react';
-import EventCard from './EventCard';
-import { useApp } from '@/context/AppProvider';
 import EmptyErrorAlert from '../Alerts/EmptyErrorAlert';
+import { EventData } from '@/actions/actions';
+import EventsCard from './EventsCard';
 
-function EventsGrid() {
-  const { events } = useApp();
-
+function EventsGrid({ allEvents }: { allEvents: EventData[] }) {
   return (
     <div>
       <div className='grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3'>
-        {events &&
-          events.length !== 0 &&
-          events.map((event, idx: number) => (
-            <div key={idx + 'kk'}>
-              <EventCard event={event} />
+        {allEvents &&
+          allEvents.length !== 0 &&
+          allEvents.map((event) => (
+            <div key={event.id}>
+              <EventsCard e={event} href={`events/${event.id}`} />
             </div>
           ))}
       </div>
-      {!events ||
-        (events && events.length === 0 && (
+      {!allEvents ||
+        (allEvents && allEvents.length === 0 && (
           <EmptyErrorAlert text={`Wow, Such empty!`} />
         ))}
     </div>
