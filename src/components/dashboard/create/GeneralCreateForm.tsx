@@ -9,6 +9,7 @@ import toast from 'react-hot-toast';
 import Spinner from '@/components/common/Spinner';
 import { createEventInDB } from '@/actions/actions';
 import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 
 type FormStateType = {
   attendees: number | string;
@@ -26,6 +27,7 @@ type FormStateType = {
 
 function GeneralCreateForm({ category }: { category: string }) {
   const { push } = useRouter();
+  const { session }: any = useSession();
 
   const [imageFile, setImage] = useState<File | null>(null);
   const [imageUrl, setImageUrl] = useState<string>('');
@@ -75,7 +77,7 @@ function GeneralCreateForm({ category }: { category: string }) {
     let data = {
       ...formData,
       banner: imageUrl,
-      user_address: 'wallet',
+      user_address: session.user.address,
       attendees: parseInt(formData.attendees as string),
       price: parseInt(formData.price as string),
       category: category,

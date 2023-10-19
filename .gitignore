@@ -9,7 +9,10 @@
 /coverage
 
 # next.js
-/.next/
+.next/cache
+.next/analyse
+.next/static/webpack
+.next/trace
 /out/
 
 # production

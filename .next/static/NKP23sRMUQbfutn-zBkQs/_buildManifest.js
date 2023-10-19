@@ -1,0 +1,1 @@
+self.__BUILD_MANIFEST={__rewrites:{afterFiles:[],beforeFiles:[{has:[{type:"header",key:"Next-Url",value:"(?:\\/(.*))?[\\/#\\?]?"}],source:"/login",destination:"/(.)login"}],fallback:[]},"/_error":["static/chunks/pages/_error-9de0d1f4f4d1fcb4.js"],sortedPages:["/_app","/_error"]},self.__BUILD_MANIFEST_CB&&self.__BUILD_MANIFEST_CB();

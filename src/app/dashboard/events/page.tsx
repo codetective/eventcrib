@@ -2,9 +2,9 @@ import EmptyErrorAlert from '@/components/Alerts/EmptyErrorAlert';
 import CustomBox from '@/components/dashboard/CustomBox';
 import EventsCard from '@/components/events/EventsCard';
 import db from '@/utils/db';
-import getShortMonthName from '@/utils/getShortMonthName';
-import Link from 'next/link';
 import React from 'react';
+import { getServerSession } from 'next-auth/next';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 
 export function SplitDate(date: string) {
   let d = date.split('-');
@@ -26,7 +26,12 @@ export function formatTime(inputTime: string) {
 }
 
 async function Events() {
-  const events = await db.event.findMany();
+  const session: any = await getServerSession(authOptions);
+  const events = await db.event.findMany({
+    where: {
+      user_address: { equals: session?.user?.address },
+    },
+  });
 
   return (
     <div>

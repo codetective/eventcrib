@@ -76,3 +76,8 @@ button:disabled {
   height: 60% !important;
   max-height: 500px;
 }
+
+.rodal.wallet_modal,
+.wallet_modal > .rodal-mask {
+  z-index: 0 !important;
+}

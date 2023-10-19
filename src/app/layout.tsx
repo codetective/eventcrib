@@ -5,6 +5,8 @@ import { Inter } from 'next/font/google';
 import { Toaster } from 'react-hot-toast';
 import AppProvider from '@/context/AppProvider';
 import SetupWeb3Modal from './SetupWeb3Modal';
+import { ReactNode } from 'react';
+import AuthContext from '@/context/AuthContext';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -15,16 +17,23 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  auth,
 }: {
   children: React.ReactNode;
+  auth: ReactNode;
 }) {
   return (
     <html lang='en'>
       <body className={inter.className} id='main_layout'>
-        <WagmiProvider>
-          <Toaster position='bottom-right' />
-          <AppProvider>{children}</AppProvider>
-        </WagmiProvider>
+        <AuthContext>
+          <WagmiProvider>
+            <Toaster position='bottom-right' />
+            <AppProvider>
+              {children}
+              {auth}
+            </AppProvider>
+          </WagmiProvider>
+        </AuthContext>
         <SetupWeb3Modal />
       </body>
     </html>
