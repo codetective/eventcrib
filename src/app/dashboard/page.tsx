@@ -12,10 +12,9 @@ async function Dashboard() {
         <h1>Dashboard</h1>
         <small>account overview</small>
       </CustomBox>
-      {/* <CustomBox>
-        <h1></h1>
-      </CustomBox> */}
-      <TaskWall />
+      <CustomBox>
+        <TaskWall />
+      </CustomBox>
     </div>
   );
 }
