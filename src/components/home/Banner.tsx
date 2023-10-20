@@ -11,7 +11,7 @@ const Banner = (props: Props) => {
         <span className='rounded-lg px-3 text-[#f24726]'>on-chain!</span>{' '}
       </h1>
       <p className='text-lg'>
-        Evema is the first and best web3 event management system <br />
+        Eventcrib is the first and best web3 event management system <br />
         powered by IPFS!
       </p>
       <div className='my-10 flex items-center gap-5 font-bold'>
