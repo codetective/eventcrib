@@ -14,6 +14,9 @@
 .next/analyse
 .next/static/webpack
 .next/trace
+.next/server
+.next/static
+.next/types
 /out/
 
 # production
