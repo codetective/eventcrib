@@ -3,7 +3,12 @@
 import FormLabel from '@/components/forms/FormLabel';
 import Input from '@/components/forms/Input';
 import Image from 'next/image';
-import React, { ChangeEvent, FormEventHandler, useState } from 'react';
+import React, {
+  ChangeEvent,
+  FormEventHandler,
+  useEffect,
+  useState,
+} from 'react';
 import SubmitImage from './SubmitImage';
 import toast from 'react-hot-toast';
 import Spinner from '@/components/common/Spinner';
@@ -27,7 +32,7 @@ type FormStateType = {
 
 function GeneralCreateForm({ category }: { category: string }) {
   const { push } = useRouter();
-  const { session }: any = useSession();
+  const { data: session }: any = useSession();
 
   const [imageFile, setImage] = useState<File | null>(null);
   const [imageUrl, setImageUrl] = useState<string>('');
@@ -73,6 +78,8 @@ function GeneralCreateForm({ category }: { category: string }) {
   };
 
   const storeEvent: FormEventHandler<HTMLFormElement> = async (e) => {
+    console.log('submitting ...');
+
     e.preventDefault();
     let data = {
       ...formData,
@@ -95,8 +102,16 @@ function GeneralCreateForm({ category }: { category: string }) {
     return push('/dashboard/events');
   };
 
+  useEffect(() => {
+    console.log(session);
+  }, [session]);
+
   return (
-    <form className='w-full flex flex-col gap-5 pb-10' onSubmit={storeEvent}>
+    <form
+      className='w-full flex flex-col gap-5 pb-10'
+      id='create_form'
+      onSubmit={storeEvent}
+    >
       {/* event name */}
 
       <div className='w-full'>
@@ -336,6 +351,7 @@ function GeneralCreateForm({ category }: { category: string }) {
           <button
             disabled={loading || imageUrl === ''}
             type='submit'
+            form='create_form'
             className='py-2 px-5 flex items-center gap-1 rounded-full text-white bg-green-500'
           >
             {loading ? <Spinner /> : ''}
