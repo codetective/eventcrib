@@ -1,50 +1,64 @@
 'use client';
 
-import React, { useState } from 'react';
-import { FaPlus } from 'react-icons/fa';
-import CustomBox from './CustomBox';
+import React from 'react';
 import Todo from './Todo';
 
-const TaskWall = () => {
-  //const tasks: string[] = [];
-  const [todo, setTodo] = useState('');
-  const [tasks, setTasks] = useState<string[]>([]);
-  const handleNewTask = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    evt.stopPropagation();
-    setTodo(evt.target.value);
-  };
-  const handleEnter = (evt: React.FormEvent) => {
-    evt.preventDefault();
+export type TaskType = {
+  id: string;
+  task: string;
+  completed: boolean;
+  user_address: string;
+};
 
-    setTasks([...tasks, todo]);
-    setTodo('');
-    //tasks.push(todo);
-  };
-
+const TaskWall = ({
+  tasks: todos,
+  action,
+  toggleTodo,
+  removeTodo,
+}: {
+  tasks: TaskType[];
+  action: (data: FormData) => Promise<void>;
+  toggleTodo: (id: string, complete: boolean) => Promise<void>;
+  removeTodo: (id: string) => Promise<void>;
+}) => {
   return (
     <div>
-      <div className='flex items-center mb-3'>
-        {/* <label htmlFor="todo"><FaPlus className='px-3 text-red-400 bg-white' /></label> */}
-        <form onSubmit={handleEnter} className='w-full'>
+      <div className='flex flex-col  mb-3'>
+        <div className='pb-5 text-xl'>
+          <h2>Tasks</h2>
+          <small className='text-sm'>
+            organise tasks for your events here:
+          </small>
+        </div>
+        <form action={action} className='w-full flex'>
           <input
             type='text'
-            id='todo'
+            id='task'
             placeholder='add new task'
-            className='w-full rounded-lg py-3 pl-4 pr-3 focus:outline bg-gray-200 focus:outline-orange-500 caret-orange-500'
-            onChange={handleNewTask}
-            value={todo}
+            name='task'
+            className='w-full rounded-s-lg py-3 pl-4 pr-3 focus:outline bg-gray-200 focus:outline-orange-500 caret-orange-500'
           />
+          <button
+            className='bg-orange-500 text-white hover:bg-transparent hover:border hover:border-orange-600 hover:text-orange-600 rounded-e-lg px-4'
+            type='submit'
+          >
+            Add
+          </button>
         </form>
       </div>
       <div>
-        {!tasks.length && <div>NO TASKS EXIST YET!</div>}
-        {tasks.length > 0 && (
-          <div>
-            {tasks.map((task, index) => (
-              <div key={++index}>
-                <CustomBox>
-                  <Todo todo={task} />
-                </CustomBox>
+        {!todos.length && (
+          <div className='text-center text-red-500'>NO TASKS EXIST YET!</div>
+        )}
+        {todos.length > 0 && (
+          <div className='flex flex-col gap-5'>
+            {todos.map((task) => (
+              <div key={task.id}>
+                <Todo
+                  todo={task}
+                  removeTodo={removeTodo}
+                  toggleTodo={toggleTodo}
+                />
               </div>
             ))}
           </div>

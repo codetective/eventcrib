@@ -1,26 +1,44 @@
-'use client'
-import React, { useState } from 'react'
-import { BiCheck } from 'react-icons/bi'
-import { FaAngleRight } from 'react-icons/fa'
+'use client';
+import React from 'react';
+import { MdClose } from 'react-icons/md';
+import { TaskType } from './TaskWall';
 
-const Todo = ({todo}: {todo: string}) => {
-  const [checked, setCheck] = useState(false);
-  const handleCheck = () => {
-    setCheck(prev => !prev);
-  }
+const Todo = ({
+  todo,
+  toggleTodo,
+  removeTodo,
+}: {
+  todo: TaskType;
+  toggleTodo: (id: string, complete: boolean) => Promise<void>;
+  removeTodo: (id: string) => Promise<void>;
+}) => {
   return (
     <div className='flex items-center justify-between'>
       <div className='flex items-center space-x-2'>
-        <div className='w-5 h-5 border-2 rounded-sm'>
-          <div className='w-full h-full flex items-center justify-center' onClick={handleCheck}>
-            {checked && <BiCheck className='text-orange-500 text-7xl font-extrabold' />}
-          </div>
-        </div>
-        <div>{todo}</div>
+        <input
+          id={todo.id}
+          type='checkbox'
+          className='cursor-pointer h-5 w-5 checked:accent-green-500 peer'
+          defaultChecked={todo.completed}
+          onChange={(e) => toggleTodo(todo.id, e.target.checked)}
+        />
+        <label
+          htmlFor={todo.id}
+          className='cursor-pointer text-xl peer-checked:line-through peer-checked:text-slate-500'
+        >
+          {todo.task}
+        </label>
       </div>
-      <div><FaAngleRight className='cursor-pointer hover:text-orange-500 duration-300' /></div>
+      <div>
+        <MdClose
+          onClick={() => {
+            removeTodo(todo.id);
+          }}
+          className='cursor-pointer text-red-500 hover:text-orange-500 duration-300 text-3xl'
+        />
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Todo
+export default Todo;
