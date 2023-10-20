@@ -5,9 +5,15 @@ generator client {
   provider = "prisma-client-js"
 }
 
+// datasource db {
+//   provider = "mysql"
+//   url      = env("DATABASE_URL")
+// }
+
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
 model Category {
@@ -21,7 +27,7 @@ model Event {
   user_address String   @unique
   event_name   String
   event_desc   String
-  event_info   String   @db.LongText
+  event_info   String   @db.Text
   event_type   String
   website      String
   location     String
