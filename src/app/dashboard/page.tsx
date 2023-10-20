@@ -5,6 +5,7 @@ import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
 import React from 'react';
 import { authOptions } from '../api/auth/[...nextauth]/route';
+import DashboardStats from '@/components/dashboard/DashboardStats';
 
 async function createTodo(data: FormData) {
   'use server';
@@ -35,7 +36,7 @@ async function removeTodo(id: string) {
 }
 
 async function Dashboard() {
-  const events = await db.event.count();
+  const events_count = await db.event.count();
   const tasks = await db.todo.findMany({
     orderBy: {
       createdAt: 'desc',
@@ -47,6 +48,8 @@ async function Dashboard() {
       <CustomBox>
         <h1>Dashboard</h1>
         <small>account overview</small>
+        <hr className='mt-4'></hr>
+        <DashboardStats event_count={events_count} />
       </CustomBox>
       <CustomBox>
         <TaskWall
