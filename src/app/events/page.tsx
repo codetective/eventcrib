@@ -2,12 +2,14 @@ import WrapContent from '@/components/common/WrapContent';
 import EventsGrid from '@/components/events/EventsGrid';
 import MainLayout from '@/components/layout/MainLayout';
 import db from '@/utils/db';
-import { Metadata } from 'next';
 import React from 'react';
 
-export const metadata: Metadata = {
-  title: 'All events | EvhentCrib - Web3 event management system',
-};
+export async function generateMetadata() {
+  return {
+    title: 'All events | EvhentCrib - Web3 event management system',
+    description: `list of events on eventcrib`,
+  };
+}
 
 async function Events() {
   const allEvents = await db.event.findMany();
