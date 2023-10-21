@@ -5,7 +5,7 @@ type Props = {};
 
 const Banner = (props: Props) => {
   return (
-    <div className="flex min-h-[80vh] flex-col items-center justify-center bg-[#1F3578] bg-[url('/images/bannerbackground.png')] bg-cover bg-no-repeat text-center text-white bg-blend-overlay">
+    <div className="flex min-h-[80vh] flex-col items-center justify-center bg-[#1F3578] bg-[url('/images/bannerbackground.png')] bg-fixed bg-cover bg-no-repeat text-center text-white bg-blend-overlay">
       <h1 className='text-6xl font-semibold leading-[1.2]'>
         Bring your events <br />
         <span className='rounded-lg px-3 text-[#f24726]'>on-chain!</span>{' '}
