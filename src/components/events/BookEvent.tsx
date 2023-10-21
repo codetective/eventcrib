@@ -1,5 +1,9 @@
 import React from 'react';
 
+async function saveEventBooking(id: string) {
+  'use server';
+}
+
 function BookEvent() {
   return (
     <div>

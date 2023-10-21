@@ -5,16 +5,17 @@ generator client {
   provider = "prisma-client-js"
 }
 
-// datasource db {
-//   provider = "mysql"
-//   url      = env("DATABASE_URL")
-// }
-
 datasource db {
-  provider  = "postgresql"
-  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
-  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+  provider          = "mysql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("DATABASE_URL_DEV")
 }
+
+// datasource db {
+//   provider  = "postgresql"
+//   url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+//   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+// }
 
 model Category {
   id            String @id @default(uuid())
@@ -24,7 +25,7 @@ model Category {
 
 model Event {
   id           String   @id @default(uuid())
-  user_address String   @unique
+  user_address String
   event_name   String
   event_desc   String
   event_info   String   @db.Text
@@ -38,6 +39,14 @@ model Event {
   time         String
   banner       String
   category     String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Booking {
+  id           String   @id @default(uuid())
+  user_address String
+  event_id     String
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 }
