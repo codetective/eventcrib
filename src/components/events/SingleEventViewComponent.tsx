@@ -37,7 +37,9 @@ function SingleEventViewComponent({
                 {BookEventSlot ? (
                   <BookEventSlot
                     eventId={event.id}
-                    booking={event.Booking?.length !== 0}
+                    booking={
+                      event.Booking ? event.Booking?.length !== 0 : false
+                    }
                   />
                 ) : (
                   ''
