@@ -17,21 +17,30 @@ export async function generateMetadata() {
 
 async function Gallery() {
   const session: any = await getServerSession(authOptions);
-  const events = await db.event.findMany({
+  const bookings = await db.booking.findMany({
     where: {
       user_address: session.user.address,
     },
     select: {
-      event_name: true,
       id: true,
-      start_date: true,
-      Gallery: {
+      event: {
         select: {
-          image: true,
+          event_name: true,
           id: true,
+          start_date: true,
+          Gallery: {
+            select: {
+              image: true,
+              id: true,
+            },
+          },
         },
       },
     },
+  });
+
+  const events = bookings.map((b) => {
+    return b.event;
   });
 
   return (
@@ -40,12 +49,17 @@ async function Gallery() {
         <div className='py-5'>
           <h1 className='px-2 py-5 text-xl capitalize'>EVENTS GALLERY</h1>
         </div>
+        {bookings.length === 0 ? (
+          <EmptyErrorAlert text='you have not booked any events yet!' />
+        ) : (
+          ''
+        )}
         <div>
           {events.map((event) => {
             return (
               <div key={event.id} className='border'>
                 <div className='bg-gray-50'>
-                  <h1 className='pb-3'>from : {event.event_name}</h1>
+                  <h1 className='pb-3 px-2 pt-2'>from : {event.event_name}</h1>
                   {event.Gallery.length === 0 ? (
                     <EmptyErrorAlert text='no images yet' />
                   ) : (
