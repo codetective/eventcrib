@@ -38,6 +38,11 @@ async function removeTodo(id: string) {
 
 async function Dashboard() {
   const session: any = await getServerSession(authOptions);
+
+  if (!session) {
+    redirect('/login');
+  }
+
   const events_count = await db.event.count({
     where: {
       user_address: {

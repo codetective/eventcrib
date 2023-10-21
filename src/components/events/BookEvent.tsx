@@ -35,7 +35,7 @@ function BookEvent({
   });
 
   async function bookEvent() {
-    if (!session.user) {
+    if (!session) {
       return toast.error('you need to login first');
     }
     await saveEventBooking(eventId, session?.user.address);

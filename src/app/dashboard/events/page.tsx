@@ -5,6 +5,7 @@ import db from '@/utils/db';
 import React from 'react';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { redirect } from 'next/navigation';
 
 export function SplitDate(date: string) {
   let d = date.split('-');
@@ -27,6 +28,9 @@ export function formatTime(inputTime: string) {
 
 async function Events() {
   const session: any = await getServerSession(authOptions);
+  if (!session) {
+    redirect('/login');
+  }
   const events = await db.event.findMany({
     where: {
       user_address: { equals: session?.user?.address },

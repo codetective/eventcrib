@@ -5,10 +5,13 @@ import db from '@/utils/db';
 import { getServerSession } from 'next-auth';
 import React from 'react';
 import GalleryGridView from '@/components/dashboard/gallery/GalleryGridView';
+import { redirect } from 'next/navigation';
 
 async function Gallery() {
   const session: any = await getServerSession(authOptions);
-
+  if (!session) {
+    redirect('/login');
+  }
   const events = await db.event.findMany({
     where: {
       user_address: {

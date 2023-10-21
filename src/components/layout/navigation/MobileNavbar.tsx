@@ -18,8 +18,8 @@ const MobileNavbar = ({
     <div
       className={
         openMenu
-          ? 'z-80 fixed left-0 top-0 h-screen w-full bg-black/10 duration-50 ease-in-out lg:hidden'
-          : 'bg-sm8/60 z-80 duration-50 fixed -left-[100%] top-0 h-screen w-full ease-in-out lg:hidden'
+          ? 'z-50 fixed left-0 top-0 h-screen w-full bg-black/10 duration-50 ease-in-out lg:hidden'
+          : 'bg-sm8/60 z-50 duration-50 fixed -left-[100%] top-0 h-screen w-full ease-in-out lg:hidden'
       }
       onClick={handleClose}
     >

@@ -7,6 +7,7 @@ import { authOptions } from '../api/auth/[...nextauth]/route';
 import db from '@/utils/db';
 import Image from 'next/image';
 import EmptyErrorAlert from '@/components/Alerts/EmptyErrorAlert';
+import { redirect } from 'next/navigation';
 
 export async function generateMetadata() {
   return {
@@ -17,6 +18,9 @@ export async function generateMetadata() {
 
 async function Gallery() {
   const session: any = await getServerSession(authOptions);
+  if (!session) {
+    redirect('/login');
+  }
   const bookings = await db.booking.findMany({
     where: {
       user_address: session.user.address,

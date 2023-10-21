@@ -8,8 +8,16 @@ import CustomBox from '@/components/dashboard/CustomBox';
 import Rodal from 'rodal';
 import 'rodal/lib/rodal.css';
 import CreateEventFormSelect from '@/components/dashboard/create/CreateEventFormSelect';
+import { useSession } from 'next-auth/react';
+import { redirect } from 'next/navigation';
 
 function Create() {
+  const { data: session } = useSession();
+
+  if (!session) {
+    redirect('/login');
+  }
+
   const typeOfEvent = useSearchParams()?.get('t');
   const { push } = useRouter();
 

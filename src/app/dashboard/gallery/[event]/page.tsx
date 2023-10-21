@@ -2,8 +2,16 @@ import CustomBox from '@/components/dashboard/CustomBox';
 import db from '@/utils/db';
 import React from 'react';
 import Image from 'next/image';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { getServerSession } from 'next-auth';
+import { redirect } from 'next/navigation';
 
 async function EventGallery({ params }: { params: { event: string } }) {
+  const session: any = await getServerSession(authOptions);
+  if (!session) {
+    redirect('/login');
+  }
+
   const event = await db.event.findFirst({
     where: {
       id: {

@@ -8,9 +8,13 @@ import EmptyErrorAlert from '@/components/Alerts/EmptyErrorAlert';
 import { FiMapPin } from 'react-icons/fi';
 import Image from 'next/image';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 
 async function MyTickets() {
   const session: any = await getServerSession(authOptions);
+  if (!session) {
+    redirect('/login');
+  }
 
   const tickets = await db.booking.findMany({
     where: {
