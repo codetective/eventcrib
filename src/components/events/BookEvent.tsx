@@ -35,6 +35,9 @@ function BookEvent({
   });
 
   async function bookEvent() {
+    if (!session.user) {
+      return toast.error('you need to login first');
+    }
     await saveEventBooking(eventId, session?.user.address);
     toast('accept transaction in wallet');
     contractWrite.write?.();
