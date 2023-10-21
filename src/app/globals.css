@@ -81,3 +81,8 @@ button:disabled {
 .wallet_modal > .rodal-mask {
   z-index: 0 !important;
 }
+
+#dashlay {
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}

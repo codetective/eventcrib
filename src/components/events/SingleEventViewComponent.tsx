@@ -21,7 +21,7 @@ function SingleEventViewComponent({
       {event ? (
         <>
           <CustomBox>
-            <div className='flex gap-5 md:gap-8 flex-wrap flex-col md:flex-row items-center sm:items-start justify-between'>
+            <div className='flex gap-5 md:gap-8 flex-wrap flex-col md:flex-row md:items-center  items-start justify-between'>
               <div>
                 <h1 className='font-bold text-2xl'>{event?.event_name}</h1>
                 <small className='text-lg'>{event?.event_desc}</small>

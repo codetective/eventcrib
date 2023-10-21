@@ -48,7 +48,7 @@ function DashboardSidebar({ toggle = false }) {
                 </ActiveLink>
               </li>
               <li>
-                <ActiveLink href='/dashboard/Gallery' className={Linkclasses}>
+                <ActiveLink href='/dashboard/gallery' className={Linkclasses}>
                   <div className='text-xl px-4'>
                     <FiImage />
                   </div>

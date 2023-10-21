@@ -1,20 +1,22 @@
 'use client';
-
+import {
+  usePrepareContractWrite,
+  useContractWrite,
+  useWaitForTransaction,
+} from 'wagmi';
 import FormLabel from '@/components/forms/FormLabel';
 import Input from '@/components/forms/Input';
 import Image from 'next/image';
-import React, {
-  ChangeEvent,
-  FormEventHandler,
-  useEffect,
-  useState,
-} from 'react';
-import SubmitImage from './SubmitImage';
+import React, { ChangeEvent, FormEventHandler, useState } from 'react';
 import toast from 'react-hot-toast';
 import Spinner from '@/components/common/Spinner';
 import { createEventInDB } from '@/actions/actions';
-import { useRouter } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
+import polygonCtx from '@/config/contracts';
+import makeGatewayURL from '@/utils/makeGatewayURL';
+import makeStorageClient from '@/utils/makeStorageClient';
+import { polygonMumbai } from 'viem/chains';
 
 type FormStateType = {
   attendees: number | string;
@@ -30,12 +32,17 @@ type FormStateType = {
   website: string;
 };
 
+type ChainArgs = {
+  eventId: string;
+  name: string;
+  ticketPrice: number;
+  totalTickets: number;
+};
+
 function GeneralCreateForm({ category }: { category: string }) {
   const { push } = useRouter();
   const { data: session }: any = useSession();
-
   const [imageFile, setImage] = useState<File | null>(null);
-  const [imageUrl, setImageUrl] = useState<string>('');
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState<FormStateType>({
     event_name: '',
@@ -50,6 +57,28 @@ function GeneralCreateForm({ category }: { category: string }) {
     end_date: '',
     time: '',
   });
+  const [chainArgs, setArgs] = useState<ChainArgs | null>(null);
+  const { config } = usePrepareContractWrite({
+    address: polygonCtx.address,
+    abi: polygonCtx.abi,
+    functionName: 'createEvent',
+    chainId: polygonMumbai.id,
+    args: [
+      chainArgs?.eventId,
+      chainArgs?.name,
+      chainArgs?.ticketPrice,
+      chainArgs?.totalTickets,
+    ],
+  });
+  const contractWrite = useContractWrite(config);
+  const waitTf = useWaitForTransaction({
+    hash: contractWrite.data?.hash,
+  });
+
+  async function callCtx() {
+    toast('accept transaction in wallet');
+    contractWrite.write!();
+  }
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     let file = e.target.files![0];
@@ -62,7 +91,6 @@ function GeneralCreateForm({ category }: { category: string }) {
     }
     setImage(file);
   };
-
   const handleFieldChange = (
     e: ChangeEvent<HTMLInputElement & HTMLSelectElement & HTMLTextAreaElement>
   ) => {
@@ -76,35 +104,67 @@ function GeneralCreateForm({ category }: { category: string }) {
       return { ...prev, [name]: value };
     });
   };
+  const storeImage = async () => {
+    //store image first
+    if (!imageFile) {
+      toast.error('Please select a validimage');
+      return;
+    }
+    setLoading(true);
+    try {
+      const client = makeStorageClient();
+      let file = imageFile;
+      let fileName = file!.name;
+      const imgCID = await client.put([file], { name: fileName });
+      const imgURL = makeGatewayURL(imgCID, fileName);
+      return imgURL;
+    } catch (error) {
+      return null;
+    }
+  };
 
   const storeEvent: FormEventHandler<HTMLFormElement> = async (e) => {
     console.log('submitting ...');
-
     e.preventDefault();
+    let imageLink = await storeImage();
+    if (!imageLink) {
+      toast.error('An error occurred while saving image');
+      setLoading(false);
+      return;
+    }
+
     let data = {
       ...formData,
-      banner: imageUrl,
+      banner: imageLink as string,
       user_address: session.user.address,
       attendees: parseInt(formData.attendees as string),
       price: parseInt(formData.price as string),
       category: category,
     };
-    setLoading(true);
 
     const res = await createEventInDB(data);
+
     if (!res) {
       toast.error('Something went wrong while saving to database');
       setLoading(false);
       return;
     }
+    //store to chain
+    setArgs({
+      eventId: res,
+      name: formData.event_name,
+      ticketPrice: parseInt(formData.price as string),
+      totalTickets: parseInt(formData.attendees as string),
+    });
 
-    toast.success('Event created successfully!');
-    return push('/dashboard/events');
+    setLoading(false);
+    // push('/dashboard/events');
   };
 
-  useEffect(() => {
-    console.log(session);
-  }, [session]);
+  if (waitTf.isSuccess) {
+    toast.success('event submitted to blockchain, confirm in wallet!!');
+    redirect('/dashboard/events');
+  }
 
   return (
     <form
@@ -323,13 +383,14 @@ function GeneralCreateForm({ category }: { category: string }) {
               accept='image/*'
               onChange={handleImageChange}
             />
-            {imageUrl === '' ? (
+            {/* {imageUrl === '' ? (
               <SubmitImage image={imageFile} setImageUrl={setImageUrl} />
             ) : (
               ''
-            )}
+            )} */}
           </div>
         </div>
+        {/* preview image bos */}
         <div className='w-full md:w-[60%] h-60 relative border border-gray-400 bg-gray-100 px-3 mb-6 md:mb-0'>
           {imageFile ? (
             <Image
@@ -346,22 +407,35 @@ function GeneralCreateForm({ category }: { category: string }) {
           </p>
         </div>
       </div>
+
       <div className='flex justify-end items-end'>
         <div className='flex flex-col items-end'>
-          <button
-            disabled={loading || imageUrl === ''}
-            type='submit'
-            form='create_form'
-            className='py-2 px-5 flex items-center gap-1 rounded-full text-white bg-green-500'
-          >
-            {loading ? <Spinner /> : ''}
-            {loading ? 'creating event ...' : 'Create event'}
-          </button>
-          {imageUrl !== '' ? (
-            ''
-          ) : (
+          {!chainArgs && (
+            <button
+              disabled={loading || !imageFile}
+              type='submit'
+              form='create_form'
+              className='py-2 px-5 flex items-center gap-1 rounded-full text-white bg-blue-500'
+            >
+              {loading ? <Spinner /> : ''}
+              {loading ? 'creating event ...' : 'Create'}
+            </button>
+          )}
+
+          {chainArgs && (
+            <button
+              disabled={waitTf.isLoading}
+              type='button'
+              onClick={callCtx}
+              className='py-2 px-5 flex items-center gap-1 rounded-full text-white bg-green-500'
+            >
+              {waitTf.isLoading ? <Spinner /> : ''}
+              {waitTf.isLoading ? 'saving event ...' : 'Save event'}
+            </button>
+          )}
+          {chainArgs && (
             <small className='italic pt-3 font-bold text-red-500'>
-              * please upload image first
+              * this will save to the blockchain
             </small>
           )}
         </div>

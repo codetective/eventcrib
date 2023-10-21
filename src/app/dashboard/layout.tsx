@@ -11,7 +11,10 @@ function DashboardLayout({ children }: { children: ReactNode }) {
 
   return (
     <>
-      <div className='relative bg-gray-50 max-w-[1380px] overflow-hidden max-h-screen'>
+      <div
+        id='dashlay'
+        className='relative bg-gray-50 max-w-[1380px] overflow-hidden max-h-screen'
+      >
         <DashboardHeader toggle={toggleSidebarState} open={sidebarState} />
         <DashboardSidebar toggle={sidebarState} />
 

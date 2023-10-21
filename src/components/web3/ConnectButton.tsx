@@ -4,20 +4,28 @@ import React from 'react';
 import { signOut, useSession } from 'next-auth/react';
 import Spinner from '../common/Spinner';
 import { useDisconnect } from 'wagmi';
+import { usePathname, useRouter } from 'next/navigation';
 
 function ConnectButton() {
   const { data: session, status }: any = useSession();
   const { disconnectAsync } = useDisconnect();
+  const pathname = usePathname();
+  const { push } = useRouter();
 
   const handleLogout = async () => {
-    disconnectAsync();
-    signOut({ callbackUrl: '/' });
+    if (pathname?.includes('/dashboard')) {
+      disconnectAsync();
+      signOut({ callbackUrl: '/' });
+      return;
+    }
+    push('/dashboard');
+    return;
   };
 
   if (status === 'authenticated') {
     return (
       <button
-        title='logout'
+        title={pathname?.includes('/dashboard') ? 'logout' : 'go to dashboard'}
         onClick={handleLogout}
         className='px-5 py-2 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-full'
       >

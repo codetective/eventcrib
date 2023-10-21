@@ -36,7 +36,14 @@ async function removeTodo(id: string) {
 }
 
 async function Dashboard() {
-  const events_count = await db.event.count();
+  const session: any = await getServerSession(authOptions);
+  const events_count = await db.event.count({
+    where: {
+      user_address: {
+        equals: session.user.address,
+      },
+    },
+  });
   const tasks = await db.todo.findMany({
     orderBy: {
       createdAt: 'desc',
