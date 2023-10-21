@@ -78,3 +78,15 @@ export async function saveEventBooking(id: string, address: string) {
 
   return res;
 }
+export async function saveGalleryImage(id: string, image: string) {
+  'use server';
+
+  let res = await db.gallery.create({
+    data: {
+      image: image,
+      event_id: id,
+    },
+  });
+
+  return res;
+}

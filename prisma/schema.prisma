@@ -42,6 +42,7 @@ model Event {
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
   Booking      Booking[]
+  Gallery      Gallery[]
 }
 
 model Booking {
@@ -51,6 +52,15 @@ model Booking {
   event_id     String
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+}
+
+model Gallery {
+  id        String   @id @default(uuid())
+  event     Event    @relation(fields: [event_id], references: [id])
+  event_id  String
+  image     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Todo {

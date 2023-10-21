@@ -4,6 +4,7 @@ import polygonCtx from '@/config/contracts';
 import { useSession } from 'next-auth/react';
 import React from 'react';
 import toast from 'react-hot-toast';
+import { parseEther } from 'viem';
 import { polygonMumbai } from 'viem/chains';
 import {
   useContractWrite,
@@ -25,6 +26,7 @@ function BookEvent({
     functionName: 'purchaseTickets',
     chainId: polygonMumbai.id,
     args: [eventId, 1],
+    value: parseEther('1'),
   });
 
   const contractWrite = useContractWrite(config);
