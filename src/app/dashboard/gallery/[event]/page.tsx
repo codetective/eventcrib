@@ -10,7 +10,8 @@ async function EventGallery({ params }: { params: { event: string } }) {
         equals: params.event,
       },
     },
-    include: {
+    select: {
+      event_name: true,
       Gallery: {
         select: {
           image: true,
