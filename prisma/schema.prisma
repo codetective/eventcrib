@@ -6,9 +6,9 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL_DEV")
-  // shadowDatabaseUrl = env("DATABASE_URL_DEV")
+  provider          = "mysql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("DATABASE_URL_DEV")
 }
 
 // datasource db {
