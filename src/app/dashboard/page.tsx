@@ -49,6 +49,11 @@ async function Dashboard() {
     orderBy: {
       createdAt: 'desc',
     },
+    where: {
+      user_address: {
+        equals: session.user.address,
+      },
+    },
   });
 
   return (
