@@ -19,6 +19,7 @@ async function createTodo(data: FormData) {
   }
 
   await db.todo.create({ data: { task, completed: false, user_address } });
+  data.set('task', '');
   redirect('/dashboard');
 }
 
