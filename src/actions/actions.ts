@@ -19,6 +19,7 @@ export type EventData = {
 };
 
 import db from '@/utils/db';
+import { getServerSession } from 'next-auth';
 
 export async function createEventInDB(data: EventData) {
   const {
@@ -63,4 +64,17 @@ export async function createEventInDB(data: EventData) {
 
     return null;
   }
+}
+
+export async function saveEventBooking(id: string, address: string) {
+  'use server';
+
+  let res = await db.booking.create({
+    data: {
+      user_address: address,
+      event_id: id,
+    },
+  });
+
+  return res;
 }

@@ -13,7 +13,14 @@ function SingleEventViewComponent({
   event,
   bookEventSlot: BookEventSlot,
 }: {
-  event: EventData | null;
+  event:
+    | (EventData & {
+        Booking: {
+          id: string;
+          user_address: string;
+        }[];
+      })
+    | null;
   bookEventSlot?: any;
 }) {
   return (
@@ -26,7 +33,16 @@ function SingleEventViewComponent({
                 <h1 className='font-bold text-2xl'>{event?.event_name}</h1>
                 <small className='text-lg'>{event?.event_desc}</small>
               </div>
-              <div>{BookEventSlot ? <BookEventSlot /> : ''}</div>
+              <div>
+                {BookEventSlot ? (
+                  <BookEventSlot
+                    eventId={event.id}
+                    booking={event.Booking.length !== 0}
+                  />
+                ) : (
+                  ''
+                )}
+              </div>
             </div>
           </CustomBox>
           <CustomBox>

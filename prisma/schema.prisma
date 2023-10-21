@@ -24,11 +24,11 @@ model Category {
 }
 
 model Event {
-  id           String   @id @default(uuid())
+  id           String    @id @default(uuid())
   user_address String
   event_name   String
   event_desc   String
-  event_info   String   @db.Text
+  event_info   String    @db.Text
   event_type   String
   website      String
   location     String
@@ -39,13 +39,15 @@ model Event {
   time         String
   banner       String
   category     String
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  Booking      Booking[]
 }
 
 model Booking {
   id           String   @id @default(uuid())
   user_address String
+  event        Event    @relation(fields: [event_id], references: [id])
   event_id     String
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
