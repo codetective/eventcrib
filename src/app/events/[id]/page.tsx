@@ -10,22 +10,26 @@ import React from 'react';
 async function SingleEventView({ params }: { params: any }) {
   const session: any = await getServerSession(authOptions);
 
-  const event = await db.event.findUnique({
-    where: { id: params.id },
-    include: {
-      Booking: {
-        where: {
-          user_address: {
-            equals: session.user.address,
+  const event = session
+    ? await db.event.findUnique({
+        where: { id: params.id },
+        include: {
+          Booking: {
+            where: {
+              user_address: {
+                equals: session.user.address,
+              },
+            },
+            select: {
+              id: true,
+              user_address: true,
+            },
           },
         },
-        select: {
-          id: true,
-          user_address: true,
-        },
-      },
-    },
-  });
+      })
+    : await db.event.findUnique({
+        where: { id: params.id },
+      });
 
   return (
     <MainLayout>
