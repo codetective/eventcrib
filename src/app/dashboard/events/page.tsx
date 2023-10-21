@@ -25,6 +25,13 @@ export function formatTime(inputTime: string) {
   }
 }
 
+export async function generateMetadata() {
+  return {
+    title: 'all events on EventCrib',
+    description: `list of all events from different categories`,
+  };
+}
+
 async function Events() {
   const session: any = await getServerSession(authOptions);
   const events = await db.event.findMany({

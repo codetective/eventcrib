@@ -3,6 +3,13 @@ import GalleryGrid from '@/components/gallery/GalleryGrid';
 import MainLayout from '@/components/layout/MainLayout';
 import React from 'react';
 
+export async function generateMetadata() {
+  return {
+    title: 'Gallery | EventCrib',
+    description: `pictures from all events from different categories`,
+  };
+}
+
 function Gallery() {
   return (
     <MainLayout>

@@ -11,7 +11,7 @@ function EventsGrid({ allEvents }: { allEvents: EventData[] }) {
           allEvents.length !== 0 &&
           allEvents.map((event) => (
             <div key={event.id}>
-              <EventsCard e={event} href={`events/${event.id}`} />
+              <EventsCard e={event} href={`/events/${event.id}`} />
             </div>
           ))}
       </div>
