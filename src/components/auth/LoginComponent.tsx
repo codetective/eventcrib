@@ -37,14 +37,15 @@ function LoginComponent() {
       const response = await signIn('web3', {
         message: JSON.stringify(message),
         signedMessage,
-        redirect: false,
+        redirect: true,
         callbackUrl: '/dashboard',
       });
       if (response?.error) {
         console.log('Error occured:', response.error);
-      } else {
-       window.location.href ='/dashboard'
-      }
+      } 
+      //else {
+       //window.location.href ='/dashboard'
+      //}
     } catch (error) {
       console.log('Error Occured', error);
     }
