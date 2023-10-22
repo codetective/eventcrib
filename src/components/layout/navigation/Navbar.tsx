@@ -11,7 +11,7 @@ function Navbar() {
 
   return (
     <nav className='border-b border-[#f3f4f6] bg-white shadow-sm'>
-      <div className='container mx-auto flex items-center justify-between bg-white px-5 py-5'>
+      <div className='lg:container mx-auto flex items-center justify-between bg-white px-5 py-5'>
         <div className='logo'>
           <Logo />
         </div>

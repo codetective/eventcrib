@@ -7,7 +7,6 @@ import EventsGrid from '../events/EventsGrid';
 
 const RecentEvents = async () => {
   const events = await getRecentEvents();
-  console.log(events);
 
   return (
     <div className='bg-[#1F3578]/50 pb-10'>
@@ -24,29 +23,14 @@ const RecentEvents = async () => {
             </Link>
           </div>
           {events.length !== 0 ? <EventsGrid allEvents={events} /> : ''}
-          <div className='grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3'>
-            {/* {events &&
-              [
-                ...events[0].result,
-                ...events[1].result.slice(1, events[1].result.length),
-              ].map((event: any, idx: any) => (
-                <div key={idx + 'hg'} className='mx-auto w-[95%]'>
-                  <EventCard key={idx + 'hg'} event={event} />
-                </div>
-              ))} */}
-          </div>
-          {/* {events && [
-              ...events[0].result,
-              ...events[1].result.slice(1, events[1].result.length),
-            ] &&
-            events.length === 0 && (
-              <div className='flex flex-col items-center justify-center gap-3 p-5'>
-                <div className='text-3xl'>
-                  <FaExclamation />
-                </div>
-                <p className='lg'>No events yet, check back later</p>
+          {events.length === 0 && (
+            <div className='flex flex-col items-center justify-center gap-3 p-5'>
+              <div className='text-3xl'>
+                <FaExclamation />
               </div>
-            )} */}
+              <p className='lg'>No events yet, check back later</p>
+            </div>
+          )}
         </div>
       </WrapContent>
     </div>
