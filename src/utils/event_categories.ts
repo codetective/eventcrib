@@ -5,14 +5,14 @@ const event_categories = [
     desc: 'social gatherings for music lovers',
   },
   {
-    id: 'workshop',
-    title: 'Workshops',
-    desc: 'simple hands-on learning experience',
+    id: 'blockchain',
+    title: 'Blockchain',
+    desc: 'for web3 themed experiences',
   },
   {
-    id: 'launch',
-    title: 'Project Launch',
-    desc: 'reveal new and exciting products',
+    id: 'summit',
+    title: 'Summits',
+    desc: 'strategic government meetings',
   },
   {
     id: 'conference',
@@ -28,6 +28,16 @@ const event_categories = [
     id: 'hackathon',
     title: 'Hackathons',
     desc: 'hacking and coding competitions',
+  },
+  {
+    id: 'audition',
+    title: 'Auditions',
+    desc: 'source for talents',
+  },
+  {
+    id: 'concerts',
+    title: 'Concerts',
+    desc: 'large scale artistic events',
   },
 ];
 
