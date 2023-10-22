@@ -55,6 +55,14 @@ function DashboardSidebar({ toggle = false }) {
                   Gallery
                 </ActiveLink>
               </li>
+              <li>
+                <ActiveLink href='/my_tickets' className={Linkclasses}>
+                  <div className='text-xl px-4'>
+                    <FiImage />
+                  </div>
+                  My Tickets
+                </ActiveLink>
+              </li>
             </ul>
           </div>
         </div>
