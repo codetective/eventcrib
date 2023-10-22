@@ -10,26 +10,32 @@ import React, { ReactNode, useState } from 'react';
 function DashboardLayout({ children }: { children: ReactNode }) {
   const [sidebarState, setSidebarState] = useState(false);
   const toggleSidebarState = () => setSidebarState((prev) => !prev);
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   if (!session) {
     redirect('/login');
   }
 
   return (
     <>
-      <div
-        id='dashlay'
-        className='relative bg-gray-50 max-w-[1380px] overflow-hidden max-h-screen'
-      >
-        <DashboardHeader toggle={toggleSidebarState} open={sidebarState} />
-        <DashboardSidebar toggle={sidebarState} />
+      {status === 'authenticated' ? (
+        <div
+          id='dashlay'
+          className='relative bg-gray-50 max-w-[1380px] overflow-hidden max-h-screen'
+        >
+          <DashboardHeader toggle={toggleSidebarState} open={sidebarState} />
+          <DashboardSidebar toggle={sidebarState} />
 
-        <main className='md:ml-60 pt-16 h-screen overflow-auto'>
-          <WrapContent className='py-1'>
-            <div className='mx-auto'>{children}</div>
-          </WrapContent>
-        </main>
-      </div>
+          <main className='md:ml-60 pt-16 h-screen overflow-auto'>
+            <WrapContent className='py-1'>
+              <div className='mx-auto'>{children}</div>
+            </WrapContent>
+          </main>
+        </div>
+      ) : status === 'loading' ? (
+        <h1>isLoading</h1>
+      ) : (
+        <h2>Go to login</h2>
+      )}
     </>
   );
 }
