@@ -68,13 +68,14 @@ function UploadImageModal({
         closeOnEsc={false}
         height={500}
         width={400}
+        onClose={close}
       >
         <div className='pb-2'>
           <p>Upload image for event :</p>
           <h1 className='font-bold py-2'>{evt ? evt.event_name : 'null'}</h1>
         </div>
 
-        <div className='flex flex-col gap-1 items-center justify-center'>
+        <div className='flex flex-col gap-1 h-full items-center '>
           <div className='w-full md:w-[60%]  px-3'>
             <div className='w-full'>
               <Input
@@ -87,7 +88,7 @@ function UploadImageModal({
             </div>
           </div>
           {/* preview image bos */}
-          <div className='w-full md:w-[60%] h-[70%] relative border border-gray-400 bg-gray-100 px-3 mb-2 md:mb-0'>
+          <div className='w-full md:w-[60%] h-[50%] relative border border-gray-400 bg-gray-100 px-3 mb-2 md:mb-0'>
             {imageFile ? (
               <Image
                 src={URL.createObjectURL(imageFile!)}
@@ -105,7 +106,7 @@ function UploadImageModal({
 
           <button
             onClick={storeImage}
-            className='px-5 text-white text-xl rounded-full py-1 hover:border bg-orange-500 hover:bg-transparent hover:border-orange-800 hover:text-orange-800'
+            className='px-5 mt-5 text-white text-xl rounded-full py-1 hover:border bg-orange-500 hover:bg-transparent hover:border-orange-800 hover:text-orange-800'
           >
             {loading ? 'loading ...' : 'Save'}
           </button>

@@ -8,7 +8,7 @@ function EventsCard({ e, href }: { e: EventData; href: string }) {
   return (
     <div
       key={e.id}
-      className='flex flex-col w-full bg-white rounded shadow-lg '
+      className='flex flex-col w-full h-full bg-white rounded shadow-lg '
     >
       <div
         className='w-full h-64 md:h-52 bg-top bg-cover rounded-t'
@@ -16,8 +16,8 @@ function EventsCard({ e, href }: { e: EventData; href: string }) {
           backgroundImage: `url('${e.banner}')`,
         }}
       ></div>
-      <div className='flex flex-col w-full md:flex-row'>
-        <div className='flex flex-row justify-around p-4 font-bold leading-none text-gray-800 uppercase bg-gray-400 rounded md:flex-col md:items-center md:justify-center md:w-1/4 md:text-center'>
+      <div className='flex h-[60%] flex-col w-full md:flex-row'>
+        <div className='flex flex-row justify-around p-4 font-bold leading-none text-gray-800 uppercase bg-gray-400  md:flex-col md:items-center md:justify-center md:w-1/4 md:text-center'>
           <div className='md:text-2xl'>
             {getShortMonthName(parseInt(SplitDate(e.start_date).month))}
           </div>

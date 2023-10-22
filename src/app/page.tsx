@@ -2,6 +2,7 @@ import Banner from '@/components/home/Banner';
 import CategoryGrid from '@/components/home/CategoriesGrid';
 import HowItWorks from '@/components/home/HowItWorks';
 import Newsletter from '@/components/home/Newsletter';
+import RecentEvents from '@/components/home/RecentEvents';
 import MainLayout from '@/components/layout/MainLayout';
 import { Metadata } from 'next';
 
@@ -14,7 +15,7 @@ export default function Home() {
     <MainLayout>
       <Banner />
       <HowItWorks />
-      {/* recent events section goes here */}
+      <RecentEvents />
       <CategoryGrid />
       <Newsletter />
     </MainLayout>

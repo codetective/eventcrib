@@ -90,3 +90,12 @@ export async function saveGalleryImage(id: string, image: string) {
 
   return res;
 }
+
+export async function getRecentEvents() {
+  'use server';
+
+  let res = await db.event.findMany({
+    take: 6,
+  });
+  return res;
+}
