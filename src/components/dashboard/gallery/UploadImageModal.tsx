@@ -66,15 +66,15 @@ function UploadImageModal({
       <Rodal
         visible={evt ? true : false}
         closeOnEsc={false}
-        height={400}
+        height={500}
         width={400}
       >
-        <div className='pb-5'>
+        <div className='pb-2'>
           <p>Upload image for event :</p>
-          <h1 className='font-bold py-3'>{evt ? evt.event_name : 'null'}</h1>
+          <h1 className='font-bold py-2'>{evt ? evt.event_name : 'null'}</h1>
         </div>
 
-        <div className='flex flex-col gap-2 items-center justify-center'>
+        <div className='flex flex-col gap-1 items-center justify-center'>
           <div className='w-full md:w-[60%]  px-3'>
             <div className='w-full'>
               <Input
@@ -87,7 +87,7 @@ function UploadImageModal({
             </div>
           </div>
           {/* preview image bos */}
-          <div className='w-full md:w-[60%] h-52 relative border border-gray-400 bg-gray-100 px-3 mb-2 md:mb-0'>
+          <div className='w-full md:w-[60%] h-[70%] relative border border-gray-400 bg-gray-100 px-3 mb-2 md:mb-0'>
             {imageFile ? (
               <Image
                 src={URL.createObjectURL(imageFile!)}
