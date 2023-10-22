@@ -43,7 +43,7 @@ function LoginComponent() {
       if (response?.error) {
         console.log('Error occured:', response.error);
       } else {
-        redirect('/dashboard');
+       window.location.href ='/dashboard'
       }
     } catch (error) {
       console.log('Error Occured', error);
