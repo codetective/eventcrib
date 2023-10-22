@@ -5,6 +5,7 @@ import { polygonMumbai } from 'viem/chains';
 import { useAccount, useSignMessage } from 'wagmi';
 import { useWeb3Modal } from '@web3modal/react';
 import { getCsrfToken, signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 function LoginComponent() {
   const [mounted, setMounted] = React.useState(false);
@@ -12,6 +13,8 @@ function LoginComponent() {
   const { open } = useWeb3Modal();
   const { signMessageAsync } = useSignMessage();
   const [hasSigned, setHasSigned] = React.useState(false);
+
+  const { push } = useRouter();
 
   const handleSign = async () => {
     if (!isConnected) open();
@@ -35,11 +38,13 @@ function LoginComponent() {
       const response = await signIn('web3', {
         message: JSON.stringify(message),
         signedMessage,
-        redirect: true,
+        redirect: false,
         callbackUrl: '/dashboard',
       });
       if (response?.error) {
         console.log('Error occured:', response.error);
+      } else {
+        push('/dashboard');
       }
     } catch (error) {
       console.log('Error Occured', error);
