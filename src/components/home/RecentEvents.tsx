@@ -2,12 +2,10 @@ import Link from 'next/link';
 import React from 'react';
 import { FaExclamation } from 'react-icons/fa';
 import WrapContent from '../common/WrapContent';
-import { getRecentEvents } from '@/actions/actions';
+import { EventData } from '@/actions/actions';
 import EventsGrid from '../events/EventsGrid';
 
-const RecentEvents = async () => {
-  const events = await getRecentEvents();
-
+const RecentEvents = async ({ events }: { events: EventData[] }) => {
   return (
     <div className='bg-[#1F3578]/50 pb-10'>
       <WrapContent>
